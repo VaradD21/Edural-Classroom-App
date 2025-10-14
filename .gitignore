@@ -29,6 +29,3 @@ Thumbs.db
 *.swp
 *.swo
 *~
-
-# Test files (keep structure, ignore generated)
-backend/test_sample.pdf
