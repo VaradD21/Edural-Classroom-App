@@ -4,7 +4,7 @@ const { PDFDocument } = require('pdf-lib');
 const fs = require('fs').promises;
 const path = require('path');
 
-// Set FFmpeg path
+
 ffmpeg.setFfmpegPath(ffmpegStatic);
 
 /**
@@ -17,13 +17,13 @@ function compressVideo(inputPath, outputPath) {
   return new Promise((resolve, reject) => {
     ffmpeg(inputPath)
       .outputOptions([
-        '-vf scale=-2:480',           // Scale to 480p height, maintain aspect ratio
-        '-c:v libx264',                // Use H.264 codec
-        '-crf 28',                     // Constant Rate Factor (higher = more compression)
-        '-preset fast',                // Encoding speed preset
-        '-c:a aac',                    // Audio codec
-        '-b:a 96k',                    // Audio bitrate
-        '-movflags +faststart'         // Enable streaming
+        '-vf scale=-2:480',           
+        '-c:v libx264',                
+        '-crf 28',                     
+        '-preset fast',                
+        '-c:a aac',                    
+        '-b:a 96k',                    
+        '-movflags +faststart'         
       ])
       .output(outputPath)
       .on('end', () => {
@@ -49,7 +49,7 @@ async function compressPDF(inputPath, outputPath) {
     const existingPdfBytes = await fs.readFile(inputPath);
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
 
-    // Remove metadata to reduce size
+    
     pdfDoc.setTitle('');
     pdfDoc.setAuthor('');
     pdfDoc.setSubject('');
@@ -57,7 +57,7 @@ async function compressPDF(inputPath, outputPath) {
     pdfDoc.setProducer('');
     pdfDoc.setCreator('');
 
-    // Save with compression
+    
     const pdfBytes = await pdfDoc.save({ useObjectStreams: false });
     await fs.writeFile(outputPath, pdfBytes);
 

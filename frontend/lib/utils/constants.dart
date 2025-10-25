@@ -2,6 +2,12 @@ class ApiConstants {
   // Base URL - Update this to your backend IP if testing on physical device
   static const String baseUrl = 'http://localhost:5001';
   
+  // Authentication endpoints
+  static const String studentSignup = '/auth/student/signup';
+  static const String studentLogin = '/auth/student/login';
+  static const String verifyOtp = '/auth/student/verify-otp';
+  static const String resendOtp = '/auth/student/resend-otp';
+  
   // Teacher endpoints
   static const String teacherUpload = '/teacher/upload';
   
@@ -38,4 +44,20 @@ class AppStrings {
   static const String download = 'Download';
   static const String play = 'Play';
   static const String loading = 'Loading...';
+  
+  // Authentication strings
+  static const String login = 'Login';
+  static const String signup = 'Sign Up';
+  static const String username = 'Username';
+  static const String password = 'Password';
+  static const String name = 'Full Name';
+  static const String phone = 'Phone Number';
+  static const String email = 'Email';
+  static const String verifyEmail = 'Verify Email';
+  static const String enterOtp = 'Enter OTP';
+  static const String verify = 'Verify';
+  static const String resendOtp = 'Resend OTP';
+  static const String alreadyHaveAccount = 'Already have an account?';
+  static const String dontHaveAccount = "Don't have an account?";
+  static const String createAccount = 'Create Account';
 }

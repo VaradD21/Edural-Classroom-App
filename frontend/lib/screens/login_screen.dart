@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/constants.dart';
 import 'teacher/teacher_home_screen.dart';
-import 'student/student_home_screen.dart';
+import 'student/student_login_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -91,7 +91,7 @@ class LoginScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.pushReplacementNamed(
                         context,
-                        StudentHomeScreen.routeName,
+                        StudentLoginScreen.routeName,
                       );
                     },
                   ),

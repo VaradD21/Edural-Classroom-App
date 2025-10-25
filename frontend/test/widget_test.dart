@@ -1,13 +1,24 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:rural_classroom/main.dart';
 
 void main() {
-  testWidgets('Rural Classroom app loads', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    
     await tester.pumpWidget(const RuralClassroomApp());
 
-    // Verify that the app initializes correctly
-    expect(find.byType(MaterialApp), findsOneWidget);
+    
+    expect(find.text('0'), findsOneWidget);
+    expect(find.text('1'), findsNothing);
+
+    
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump();
+
+    
+    expect(find.text('0'), findsNothing);
+    expect(find.text('1'), findsOneWidget);
   });
 }

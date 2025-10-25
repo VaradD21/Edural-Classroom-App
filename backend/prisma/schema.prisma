@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Resource {
+  id              Int      @id @default(autoincrement())
+  fileName        String   @map("file_name")
+  fileType        String   @map("file_type")
+  subject         String
+  topic           String
+  uploadDate      DateTime @map("upload_date")
+  compressedUrl   String   @map("compressed_url")
+  originalSize    Int?     @map("original_size")
+  compressedSize  Int?     @map("compressed_size")
+
+  @@map("resources")
+}
+
+model LiveClass {
+  id        Int      @id @default(autoincrement())
+  subject   String
+  topic     String
+  joinLink  String   @map("join_link")
+  startTime DateTime @map("start_time")
+  status    String   @default("active")
+
+  @@map("live_classes")
+}
+
+model Student {
+  id         Int      @id @default(autoincrement())
+  username   String   @unique
+  password   String
+  name       String
+  phone      String
+  email      String   @unique
+  isVerified Boolean  @default(false) @map("is_verified")
+  createdAt  DateTime @map("created_at")
+
+  @@map("students")
+}
+
+model OtpVerification {
+  id        Int      @id @default(autoincrement())
+  email     String
+  otp       String
+  createdAt DateTime @map("created_at")
+  expiresAt DateTime @map("expires_at")
+  isUsed    Boolean  @default(false) @map("is_used")
+
+  @@map("otp_verifications")
+}

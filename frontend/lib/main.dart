@@ -5,6 +5,8 @@ import 'providers/resource_provider.dart';
 import 'screens/login_screen.dart';
 import 'screens/teacher/teacher_home_screen.dart';
 import 'screens/student/student_home_screen.dart';
+import 'screens/student/student_login_screen.dart';
+import 'screens/student/student_signup_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,6 +48,8 @@ class RuralClassroomApp extends StatelessWidget {
           LoginScreen.routeName: (context) => const LoginScreen(),
           TeacherHomeScreen.routeName: (context) => const TeacherHomeScreen(),
           StudentHomeScreen.routeName: (context) => const StudentHomeScreen(),
+          StudentLoginScreen.routeName: (context) => const StudentLoginScreen(),
+          StudentSignupScreen.routeName: (context) => const StudentSignupScreen(),
         },
       ),
     );

@@ -115,6 +115,90 @@ class ApiService {
     }
   }
 
+  // Authentication: Student signup
+  Future<Map<String, dynamic>> studentSignup({
+    required String username,
+    required String password,
+    required String name,
+    required String phone,
+    required String email,
+  }) async {
+    try {
+      final response = await _dio.post(
+        ApiConstants.studentSignup,
+        data: {
+          'username': username,
+          'password': password,
+          'name': name,
+          'phone': phone,
+          'email': email,
+        },
+      );
+
+      return response.data as Map<String, dynamic>;
+    } on DioException catch (e) {
+      throw _handleError(e);
+    }
+  }
+
+  // Authentication: Verify OTP
+  Future<Map<String, dynamic>> verifyOtp({
+    required String email,
+    required String otp,
+  }) async {
+    try {
+      final response = await _dio.post(
+        ApiConstants.verifyOtp,
+        data: {
+          'email': email,
+          'otp': otp,
+        },
+      );
+
+      return response.data as Map<String, dynamic>;
+    } on DioException catch (e) {
+      throw _handleError(e);
+    }
+  }
+
+  // Authentication: Resend OTP
+  Future<Map<String, dynamic>> resendOtp({
+    required String email,
+  }) async {
+    try {
+      final response = await _dio.post(
+        ApiConstants.resendOtp,
+        data: {
+          'email': email,
+        },
+      );
+
+      return response.data as Map<String, dynamic>;
+    } on DioException catch (e) {
+      throw _handleError(e);
+    }
+  }
+
+  // Authentication: Student login
+  Future<Map<String, dynamic>> studentLogin({
+    required String username,
+    required String password,
+  }) async {
+    try {
+      final response = await _dio.post(
+        ApiConstants.studentLogin,
+        data: {
+          'username': username,
+          'password': password,
+        },
+      );
+
+      return response.data as Map<String, dynamic>;
+    } on DioException catch (e) {
+      throw _handleError(e);
+    }
+  }
+
   String _handleError(DioException e) {
     if (e.type == DioExceptionType.connectionTimeout ||
         e.type == DioExceptionType.receiveTimeout) {

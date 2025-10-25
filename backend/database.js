@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const fs = require('fs');
 
-// Ensure data directory exists
+
 const dataDir = path.join(__dirname, 'data');
 if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, { recursive: true });
@@ -11,9 +11,9 @@ if (!fs.existsSync(dataDir)) {
 const dbPath = process.env.DB_PATH || './data/rural_classroom.db';
 const db = new sqlite3.Database(dbPath);
 
-// Initialize database schema
+
 db.serialize(() => {
-  // Resources table for lectures and materials
+  
   db.run(`
     CREATE TABLE IF NOT EXISTS resources (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -28,7 +28,7 @@ db.serialize(() => {
     )
   `);
 
-  // Live classes table (placeholder for future)
+  
   db.run(`
     CREATE TABLE IF NOT EXISTS live_classes (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -37,6 +37,32 @@ db.serialize(() => {
       join_link TEXT NOT NULL,
       start_time TEXT NOT NULL,
       status TEXT DEFAULT 'active'
+    )
+  `);
+
+  // Students table for authentication
+  db.run(`
+    CREATE TABLE IF NOT EXISTS students (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      username TEXT UNIQUE NOT NULL,
+      password TEXT NOT NULL,
+      name TEXT NOT NULL,
+      phone TEXT NOT NULL,
+      email TEXT UNIQUE NOT NULL,
+      is_verified INTEGER DEFAULT 0,
+      created_at TEXT NOT NULL
+    )
+  `);
+
+  // OTP verifications table
+  db.run(`
+    CREATE TABLE IF NOT EXISTS otp_verifications (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      email TEXT NOT NULL,
+      otp TEXT NOT NULL,
+      created_at TEXT NOT NULL,
+      expires_at TEXT NOT NULL,
+      is_used INTEGER DEFAULT 0
     )
   `);
 
